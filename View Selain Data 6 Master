@@ -1,0 +1,48 @@
+
+-- =========================================================
+-- 6. VIEW SELAIN DATA 6 MASTER
+-- =========================================================
+
+-- View Pengadaan & Vendor/User
+CREATE OR REPLACE VIEW v_transaksi_pengadaan AS
+SELECT 
+    p.idpengadaan,
+    p.timestamp,
+    v.nama_vendor,
+    u.username AS kasir_admin,
+    p.subtotal_nilai,
+    p.ppn,
+    p.total_nilai,
+    p.status
+FROM pengadaan p
+JOIN vendor v ON p.vendor_idvendor = v.idvendor
+JOIN user u ON p.user_iduser = u.iduser;
+
+-- View Penjualan & Margin
+CREATE OR REPLACE VIEW v_transaksi_penjualan AS
+SELECT 
+    pn.idpenjualan,
+    pn.created_at,
+    u.username AS kasir,
+    m.persen AS margin_persen,
+    pn.subtotal_nilai,
+    pn.ppn,
+    pn.total_nilai
+FROM penjualan pn
+JOIN user u ON pn.iduser = u.iduser
+JOIN margin_penjualan m ON pn.idmargin_penjualan = m.idmargin_penjualan;
+
+-- View Kartu Stok
+CREATE OR REPLACE VIEW v_kartu_stok AS
+SELECT 
+    ks.idkartu_stok,
+    b.nama AS nama_barang,
+    ks.jenis_transaksi,
+    ks.masuk,
+    ks.keluar,
+    ks.stock,
+    ks.created_at,
+    ks.idtransaksi
+FROM kartu_stok ks
+JOIN barang b ON ks.idbarang = b.idbarang
+
