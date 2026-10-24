@@ -1,6 +1,6 @@
--- File Function Stored Procedure oleh Fahri
+
 -- =========================================================
--- 7. DATABASE FUNCION 
+-- 7. DATABASE FUNCION
 -- =========================================================
 
 DELIMITER //
@@ -21,4 +21,5 @@ BEGIN
 END //
 
 DELIMITER ;
+
 SELECT fn_get_stok_terakhir(1);
